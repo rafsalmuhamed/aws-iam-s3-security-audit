@@ -23,6 +23,28 @@ Created a dedicated IAM user (`S3-Audit-Analyst`) for programmatic and console a
 ### Phase 3: Engineering the Access Policy
 To grant highly restricted access, a custom inline JSON policy was authored and bound to the IAM identity. This policy restricts lateral movement and limits actions to a single resource ARN.
 
+Security Audit & Validation
+To verify the efficacy of the access controls, a live architectural audit was conducted using the restricted IAM identity.
+
+✅ Authorized Actions (True Positives):
+
+Successfully navigated the S3 console.
+
+Successfully listed objects within the targeted S3 bucket.
+
+Successfully executed s3:GetObject (download) and s3:PutObject (upload) API calls exclusively within the authorized bucket.
+
+❌ Unauthorized Actions (True Negatives):
+
+Lateral Movement Blocked: Attempted to access the Amazon EC2 dashboard; received explicit Access Denied API errors.
+
+Privilege Escalation Blocked: Attempted to modify the S3 bucket's "Block Public Access" settings; received Access Denied.
+
+Infrastructure Destruction Blocked: Attempted to execute s3:DeleteBucket; action was successfully blocked, proving the identity cannot destroy the storage infrastructure.
+
+🎯 Conclusion
+This project successfully validates the critical importance of identity-based perimeter security in cloud environments. By relying on granular JSON policies rather than broad managed roles, the architecture actively mitigates the risks of misconfiguration, unauthorized internal access, and lateral movement.
+
 ```json
 {
   "Version": "2012-10-17",
@@ -54,25 +76,6 @@ To grant highly restricted access, a custom inline JSON policy was authored and 
       "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME-HERE/*"
     }
   ]
-Security Audit & Validation
-To verify the efficacy of the access controls, a live architectural audit was conducted using the restricted IAM identity.
-
-✅ Authorized Actions (True Positives):
-
-Successfully navigated the S3 console.
-
-Successfully listed objects within the targeted S3 bucket.
-
-Successfully executed s3:GetObject (download) and s3:PutObject (upload) API calls exclusively within the authorized bucket.
-
-❌ Unauthorized Actions (True Negatives):
-
-Lateral Movement Blocked: Attempted to access the Amazon EC2 dashboard; received explicit Access Denied API errors.
-
-Privilege Escalation Blocked: Attempted to modify the S3 bucket's "Block Public Access" settings; received Access Denied.
-
-Infrastructure Destruction Blocked: Attempted to execute s3:DeleteBucket; action was successfully blocked, proving the identity cannot destroy the storage infrastructure.
-
 <img width="1907" height="868" alt="Screenshot 2026-04-16 122153" src="https://github.com/user-attachments/assets/a8248414-38d1-4db3-a43c-6c95577e5632" />
 <img width="1919" height="877" alt="Screenshot 2026-04-16 122205" src="https://github.com/user-attachments/assets/77a760f4-4d63-4266-9c3c-8e1d2f81da1a" />
 <img width="1909" height="842" alt="Screenshot 2026-04-16 123942" src="https://github.com/user-attachments/assets/95e387de-f765-4fe4-b375-5e0343074cad" />

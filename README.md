@@ -76,6 +76,8 @@ This project successfully validates the critical importance of identity-based pe
       "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME-HERE/*"
     }
   ]
+}
+```
 <img width="1907" height="868" alt="Screenshot 2026-04-16 122153" src="https://github.com/user-attachments/assets/a8248414-38d1-4db3-a43c-6c95577e5632" />
 <img width="1919" height="877" alt="Screenshot 2026-04-16 122205" src="https://github.com/user-attachments/assets/77a760f4-4d63-4266-9c3c-8e1d2f81da1a" />
 <img width="1909" height="842" alt="Screenshot 2026-04-16 123942" src="https://github.com/user-attachments/assets/95e387de-f765-4fe4-b375-5e0343074cad" />
@@ -87,4 +89,3 @@ This project successfully validates the critical importance of identity-based pe
 <img width="1891" height="875" alt="Screenshot 2026-04-16 125759" src="https://github.com/user-attachments/assets/5f8600d3-cbb2-4ee2-9252-1b7161d3281a" />
 <img width="1878" height="854" alt="Screenshot 2026-04-16 130101" src="https://github.com/user-attachments/assets/d23e86e6-aa2d-4139-aac8-4bb98b6dee6d" />
 
-}
